@@ -13,7 +13,7 @@ const Login = () => {
     let [password, setPassword] = useState("");
     let [email, setEmail] = useState("");
 
-    console.log(email.trim().includes("gmail.com"));
+    email.trim().includes("gmail.com");
 
     useEffect(() => {
         setEmailErrors({
@@ -70,8 +70,7 @@ const Login = () => {
             if (err.response) {
                 toast.error(err.response.data.message);
             } else {
-                // toast.error(err.message);
-                console.log(err);
+                toast.error(err.message);
             }
         } finally {
             dispatch({ type: "LOADING", loading: false });
