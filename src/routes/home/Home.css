@@ -1,0 +1,39 @@
+.welcome {
+    height: 150px;
+    background-color: rgb(10, 180, 190);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome__container {
+    display: flex;
+    gap: 20px;
+}
+
+.box {
+    background-color: rgb(10, 180, 190);
+}
+
+.welcome__h1 {
+    color: #95ff00;
+    text-shadow: 0px 0px 20px #ffff31;
+    font-family: sans-serif;
+    font-size: 50px;
+}
+
+.box {
+    animation: move2 3s forwards ease-in-out;
+    border-left: 2px solid #fbff00;
+}
+
+@keyframes move2 {
+    from {
+        margin-left: -270px;
+        width: 260px;
+    }
+    to {
+        margin-left: 0px;
+        width: 0;
+    }
+}
