@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./routes/home/Home";
-import Auth from "./routes/auth/Auth";
+// import Home from "./routes/home/Home";
+// import Auth from "./routes/auth/Auth";
 import Login from "./routes/auth/login/Login";
 import "./App.scss";
 import Register from "./routes/auth/register/Register";
@@ -12,10 +12,10 @@ function App() {
         <>
             <Routes>
                 {/* <Route path="" element={<Home />} /> */}
-                <Route path="" element={<Auth />}>
-                    <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register />} />
-                </Route>
+                {/* <Route path="" element={<Auth />}> */}
+                <Route path="login" element={<Login />} />
+                {/* <Route path="register" element={<Register />} /> */}
+                {/* </Route> */}
             </Routes>
 
             <ToastContainer />

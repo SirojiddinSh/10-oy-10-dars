@@ -1,13 +1,20 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./Auth.scss";
 
 const Auth = () => {
+    let yuborish = () => {
+        let loginBtn = document.querySelector(".LoginBtn");
+        loginBtn.innerHTML = "Loading...";
+        loginBtn.style.display = "none";
+        window.location.href = "/login";
+    };
     return (
-        <div>
-            <div className="auth">
-                <Outlet />
-            </div>
+        <div className="auth">
+            <button className="LoginBtn" onClick={yuborish}>
+                Login ga kiring
+            </button>
+            <Outlet />
         </div>
     );
 };

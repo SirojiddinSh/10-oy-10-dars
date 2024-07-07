@@ -3,13 +3,24 @@ import { useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "../../../api/index";
 import AppContext from "../../../context/store";
+import "./Login.css";
 
 const Login = () => {
     let [state, dispatch] = useContext(AppContext);
     let [passwordErrors, setPasswordErrors] = useState({});
+    let [emailErrors, setEmailErrors] = useState("");
 
     let [password, setPassword] = useState("");
     let [email, setEmail] = useState("");
+
+    console.log(email.trim().includes("gmail.com"));
+
+    useEffect(() => {
+        setEmailErrors({
+            gmail: !email.trim().includes("gmail.com"),
+            length: email.length >= 3 ? false : true,
+        });
+    }, [email]);
 
     useEffect(() => {
         setPasswordErrors({
@@ -68,38 +79,48 @@ const Login = () => {
     };
 
     return (
-        <div className="form-container">
-            <div className="form-wrapper">
-                <h2 className="auth-title">Login</h2>
-                <form className="auth-form" onSubmit={handleLogin}>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <ul>
-                        {passwordErrors.uppercase && (
-                            <li>At least one uppercase letter</li>
-                        )}
-                        {passwordErrors.lovercase && (
-                            <li>At least one lovercase letter</li>
-                        )}
-                        {passwordErrors.length && (
-                            <li>At least 8 characters</li>
-                        )}
-                    </ul>
-                    <Button type="submit" loading={state.loading}>
-                        Login
-                    </Button>
-                </form>
+        <div className="auth">
+            <div className="form-container">
+                <div className="form-wrapper">
+                    <h2 className="auth-title">Login</h2>
+                    <form className="auth-form" onSubmit={handleLogin}>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <ul>
+                            {emailErrors.gmail && (
+                                <li>Enter a valid email (gmail.com)</li>
+                            )}
+                            {emailErrors.length && (
+                                <li>At least 3 characters</li>
+                            )}
+                        </ul>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <ul>
+                            {passwordErrors.uppercase && (
+                                <li>At least one uppercase letter</li>
+                            )}
+                            {passwordErrors.lovercase && (
+                                <li>At least one lovercase letter</li>
+                            )}
+                            {passwordErrors.length && (
+                                <li>At least 8 characters</li>
+                            )}
+                        </ul>
+                        <Button type="submit" loading={state.loading}>
+                            Login
+                        </Button>
+                    </form>
+                </div>
             </div>
         </div>
     );
