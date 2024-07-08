@@ -3,8 +3,14 @@ import { useEffect, useState, useContext } from "react";
 import axios from "../../../api";
 import { toast } from "react-toastify";
 import AppContext from "../../../context/store";
+import { useTranslation } from "react-i18next";
 
-const Register = () => {
+const Register = ({ changeLang }) => {
+    let changeLangHandler = (e) => {
+        changeLang(e.target.value);
+    };
+    let { t } = useTranslation();
+
     let [state, dispatch] = useContext(AppContext);
     let [passwordErrors, setPasswordErrors] = useState({
         uppercase: true,
@@ -55,10 +61,6 @@ const Register = () => {
                         avatar,
                     });
 
-                    if (response.data) {
-                        document.location.href = "/login";
-                    }
-
                     delete response.data.password;
 
                     dispatch({
@@ -67,6 +69,12 @@ const Register = () => {
                     });
 
                     toast.success("Muvaffaqiyatli ro'yhatdan o'tdingiz");
+
+                    setTimeout(() => {
+                        if (response.data) {
+                            document.location.href = "/login";
+                        }
+                    }, 2000);
                 }
             } else {
                 throw new Error("Xatolik yuz berdi");
@@ -84,13 +92,17 @@ const Register = () => {
 
     return (
         <div className="auth">
+            <select onChange={changeLangHandler}>
+                <option value="en">English</option>
+                <option value="uz">Uzbek</option>
+            </select>
             <div className="form-container">
                 <div className="form-wrapper">
-                    <h2 className="auth-title">Register</h2>
+                    <h2 className="auth-title">{t("Register")}</h2>
                     <form className="auth-form" onSubmit={handleRegister}>
                         <input
                             type="text"
-                            placeholder="Username"
+                            placeholder={t("Username")}
                             required
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -98,7 +110,9 @@ const Register = () => {
                         <ul>
                             {usernameErrors.capitalLetter && (
                                 <li>
-                                    First character should be uppercase letter
+                                    {t(
+                                        "First character should be uppercase letter"
+                                    )}
                                 </li>
                             )}
                             {usernameErrors.length && (
@@ -107,19 +121,19 @@ const Register = () => {
                         </ul>
                         <input
                             type="password"
-                            placeholder="Password"
+                            placeholder={t("Password")}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <ul>
                             {passwordErrors.uppercase && (
-                                <li>At least one uppercase letter</li>
+                                <li>{t("At least one uppercase letter")}</li>
                             )}
                             {passwordErrors.lovercase && (
-                                <li>At least one lovercase letter</li>
+                                <li>{t("At least one lovercase letter")}</li>
                             )}
                             {passwordErrors.length && (
-                                <li>At least 8 characters</li>
+                                <li>{t("At least 8 characters")}</li>
                             )}
                         </ul>
                         <input
@@ -136,12 +150,8 @@ const Register = () => {
                             onChange={(e) => setAvatar(e.target.value)}
                             required
                         />
-                        <Button
-                            link="/login"
-                            type="submit"
-                            loading={state.loading}
-                        >
-                            Register
+                        <Button type="submit" loading={state.loading}>
+                            {t("register")}
                         </Button>
                     </form>
                 </div>

@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const Button = ({ children, type, loading, link }) => {
+const Button = ({ children, type, loading }) => {
+    let { t } = useTranslation();
+    let yuklash = t("Loading...");
     return (
         <button disabled={loading} className="button" type={type}>
-            {loading ? "Loading..." : children}
+            {loading ? yuklash : children}
         </button>
     );
 };

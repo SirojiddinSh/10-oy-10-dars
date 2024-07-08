@@ -3,9 +3,15 @@ import { useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "../../../api/index";
 import AppContext from "../../../context/store";
+import { useTranslation } from "react-i18next";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({ changeLang }) => {
+    let changeLangHandler = (e) => {
+        changeLang(e.target.value);
+    };
+    let { t } = useTranslation();
+
     let [state, dispatch] = useContext(AppContext);
     let [passwordErrors, setPasswordErrors] = useState({});
     let [emailErrors, setEmailErrors] = useState("");
@@ -81,6 +87,10 @@ const Login = () => {
 
     return (
         <div className="auth">
+            <select onChange={changeLangHandler}>
+                <option value="en">English</option>
+                <option value="uz">Uzbek</option>
+            </select>
             <div className="form-container">
                 <div className="form-wrapper">
                     <h2 className="auth-title">Login</h2>
@@ -94,10 +104,10 @@ const Login = () => {
                         />
                         <ul>
                             {emailErrors.gmail && (
-                                <li>Enter a valid email (gmail.com)</li>
+                                <li>{t("At least 3 characters")}</li>
                             )}
                             {emailErrors.length && (
-                                <li>At least 3 characters</li>
+                                <li>{t("Enter a valid email (gmail.com)")}</li>
                             )}
                         </ul>
                         <input
@@ -108,13 +118,13 @@ const Login = () => {
                         />
                         <ul>
                             {passwordErrors.uppercase && (
-                                <li>At least one uppercase letter</li>
+                                <li>{t("At least one uppercase letter")}</li>
                             )}
                             {passwordErrors.lovercase && (
-                                <li>At least one lovercase letter</li>
+                                <li>{t("At least one lovercase letter")}</li>
                             )}
                             {passwordErrors.length && (
-                                <li>At least 8 characters</li>
+                                <li>{t("At least 8 characters")}</li>
                             )}
                         </ul>
                         <Button type="submit" loading={state.loading}>

@@ -1,12 +1,17 @@
 .auth {
-    display: flex;
+    position: relative;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column; */
+    /* align-items: center; */
     background-color: rgb(23, 216, 200);
     height: 100vh;
 }
 
 .form-container {
+    position: absolute;
+    top: 200px;
+    left: 40%;
     width: 350px;
     padding: 60px 40px;
     background-color: white;
@@ -73,4 +78,24 @@
 .LoginBtn:active {
     transform: scale(0.95);
     transition: all 0.2s;
+}
+
+select {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    border: none;
+    background-color: rgb(23, 180, 160);
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 10px;
+    font-family: sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+select option {
+    padding: 10px;
+    background-color: rgb(23, 180, 160);
 }
