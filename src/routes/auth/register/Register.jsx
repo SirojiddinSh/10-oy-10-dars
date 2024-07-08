@@ -55,6 +55,10 @@ const Register = () => {
                         avatar,
                     });
 
+                    if (response.data) {
+                        document.location.href = "/login";
+                    }
+
                     delete response.data.password;
 
                     dispatch({
@@ -79,60 +83,68 @@ const Register = () => {
     };
 
     return (
-        <div className="form-container">
-            <div className="form-wrapper">
-                <h2 className="auth-title">Register</h2>
-                <form className="auth-form" onSubmit={handleRegister}>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        required
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <ul>
-                        {usernameErrors.capitalLetter && (
-                            <li>First character should be uppercase letter</li>
-                        )}
-                        {usernameErrors.length && (
-                            <li>At least 3 characters</li>
-                        )}
-                    </ul>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <ul>
-                        {passwordErrors.uppercase && (
-                            <li>At least one uppercase letter</li>
-                        )}
-                        {passwordErrors.lovercase && (
-                            <li>At least one lovercase letter</li>
-                        )}
-                        {passwordErrors.length && (
-                            <li>At least 8 characters</li>
-                        )}
-                    </ul>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="url"
-                        placeholder="Avatar URL"
-                        value={avatar}
-                        onChange={(e) => setAvatar(e.target.value)}
-                        required
-                    />
-                    <Button link="/login" type="submit" loading={state.loading}>
-                        Register
-                    </Button>
-                </form>
+        <div className="auth">
+            <div className="form-container">
+                <div className="form-wrapper">
+                    <h2 className="auth-title">Register</h2>
+                    <form className="auth-form" onSubmit={handleRegister}>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            required
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <ul>
+                            {usernameErrors.capitalLetter && (
+                                <li>
+                                    First character should be uppercase letter
+                                </li>
+                            )}
+                            {usernameErrors.length && (
+                                <li>At least 3 characters</li>
+                            )}
+                        </ul>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <ul>
+                            {passwordErrors.uppercase && (
+                                <li>At least one uppercase letter</li>
+                            )}
+                            {passwordErrors.lovercase && (
+                                <li>At least one lovercase letter</li>
+                            )}
+                            {passwordErrors.length && (
+                                <li>At least 8 characters</li>
+                            )}
+                        </ul>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="url"
+                            placeholder="Avatar URL"
+                            value={avatar}
+                            onChange={(e) => setAvatar(e.target.value)}
+                            required
+                        />
+                        <Button
+                            link="/login"
+                            type="submit"
+                            loading={state.loading}
+                        >
+                            Register
+                        </Button>
+                    </form>
+                </div>
             </div>
         </div>
     );
