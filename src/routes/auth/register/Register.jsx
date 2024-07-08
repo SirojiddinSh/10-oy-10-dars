@@ -68,13 +68,11 @@ const Register = ({ changeLang }) => {
                         user: response.data,
                     });
 
-                    toast.success("Muvaffaqiyatli ro'yhatdan o'tdingiz");
+                    // toast.success("Muvaffaqiyatli ro'yhatdan o'tdingiz");
 
-                    setTimeout(() => {
-                        if (response.data) {
-                            document.location.href = "/login";
-                        }
-                    }, 2000);
+                    if (response.data) {
+                        document.location.href = "/login";
+                    }
                 }
             } else {
                 throw new Error("Xatolik yuz berdi");
