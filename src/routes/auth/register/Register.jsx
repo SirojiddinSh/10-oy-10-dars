@@ -68,7 +68,7 @@ const Register = ({ changeLang }) => {
                         user: response.data,
                     });
 
-                    // toast.success("Muvaffaqiyatli ro'yhatdan o'tdingiz");
+                    toast.success("Muvaffaqiyatli ro'yhatdan o'tdingiz");
 
                     if (response.data) {
                         document.location.href = "/login";
