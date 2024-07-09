@@ -1,15 +1,14 @@
 .auth {
-    position: relative;
-    /* display: flex;
+    /* position: relative; */
+    display: flex;
     justify-content: center;
-    flex-direction: column; */
-    /* align-items: center; */
+    flex-direction: column;
+    align-items: center;
     background-color: rgb(23, 216, 200);
     height: 100vh;
 }
 
 .form-container {
-    position: absolute;
     top: 200px;
     left: 40%;
     width: 350px;
